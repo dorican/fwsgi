@@ -3,7 +3,6 @@
 How to use
 ----------------------
 You need to install uwsgi:
-::
 
     sudo add-apt-repository universe
     sudo apt update
