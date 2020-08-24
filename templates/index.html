@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+</head>
+<body>
+<h1>Главная страница</h1>
+<!--    {{object_list[0]['context']}}-->
+<ul>
+    {% for item in object_list %}
+    <li>{{item.context}}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>
