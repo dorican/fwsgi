@@ -4,12 +4,13 @@
 
 from wavy import render
 from models import TrainingSite
-from logger import Logger
+from logger import Logger, debug
 
 site = TrainingSite()
 logger = Logger('main')
 
 
+@debug
 def main_view(request):
     logger.log('Главная страница')
     secret = request.get('secret_key', None)
@@ -19,6 +20,7 @@ def main_view(request):
     return '200 OK', render('index.html', categories=categories, courses=courses)
 
 
+@debug
 def create_category(request):
     logger.log('Создание категории')
     if request['method'] == 'POST':
@@ -39,7 +41,7 @@ def create_category(request):
 # def about_view(request):
 #     # Просто возвращаем текст
 #     return '200 OK', "About"
-
+@debug
 def create_course(request):
     logger.log('Создание курса')
     if request['method'] == 'POST':
@@ -56,6 +58,7 @@ def create_course(request):
         return '200 OK', render('create_course.html', categories=categories)
 
 
+@debug
 def contact_view(request):
     logger.log('Страница контактов')
     # Проверка метода запроса
