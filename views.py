@@ -1,9 +1,17 @@
-from wavy import render
 
+# Запуск
+# uwsgi --http :8000 --wsgi-file main.py
+
+from wavy import render
+from models import TrainingSite
+
+site = TrainingSite()
 
 def main_view(request):
     secret = request.get('secret_key', None)
     # Используем шаблонизатор
+    objects_list = site.courses
+    print(objects_list)
     return '200 OK', render('index.html', secret=secret)
 
 
