@@ -5,9 +5,16 @@
 {% block content %}
     <h1>Отправить нам сообщение</h1>
     <form method="post">
-        <input type="text" name="title" placeholder="Заголовок">
-        <input type="text" name="text" placeholder="Текст сообщения">
-        <input type="email" name="email" placeholder="email">
-		<button type="submit">Отправить</button>
+        <div class="form-group">
+            <input type="text" name="title" placeholder="Заголовок" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <textarea type="text" name="text" placeholder="Текст сообщения" class="form-control" required rows="5">
+            </textarea>
+        </div>
+        <div class="form-group">
+            <input type="email" name="email" placeholder="email" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-secondary">Отправить</button>
     </form>
 {% endblock %}
