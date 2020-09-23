@@ -13,8 +13,7 @@ def main_view(request):
     # Используем шаблонизатор
     courses = site.courses
     categories = site.categories
-    print(categories)
-    return '200 OK', render('index.html', categories=categories)
+    return '200 OK', render('index.html', categories=categories, courses=courses)
 
 
 def create_category(request):
@@ -50,6 +49,7 @@ def create_course(request):
     else:
         categories = site.categories
         return '200 OK', render('create_course.html', categories=categories)
+
 
 def contact_view(request):
     # Проверка метода запроса

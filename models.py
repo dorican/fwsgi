@@ -86,7 +86,6 @@ class TrainingSite:
 
     def find_category_by_id(self, id):
         for item in self.categories:
-            print('item', item.id)
             if item.id == id:
                 return item
         raise Exception(f'Нет категории с id = {id}')
