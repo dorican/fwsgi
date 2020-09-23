@@ -7,6 +7,7 @@ from models import TrainingSite
 
 site = TrainingSite()
 
+
 def main_view(request):
     secret = request.get('secret_key', None)
     # Используем шаблонизатор
@@ -15,9 +16,32 @@ def main_view(request):
     return '200 OK', render('index.html', secret=secret)
 
 
-def about_view(request):
-    # Просто возвращаем текст
-    return '200 OK', "About"
+def create_category(request):
+    if request['method'] == 'POST':
+        # метод пост
+        data = request['data']
+        # print(data)
+        name = data['name']
+        category_id = data.get('category_id')
+
+        category = None
+        if category_id:
+            category = site.find_category_by_id(int(category_id))
+
+        new_category = site.create_category(name, category)
+        site.categories.append(new_category)
+        # редирект?
+        # return '302 Moved Temporarily', render('create_course.html')
+        # Для начала можно без него
+        return '200 OK', render('create_category.html')
+    else:
+        categories = site.categories
+        return '200 OK', render('create_category.html', categories=categories)
+
+
+# def about_view(request):
+#     # Просто возвращаем текст
+#     return '200 OK', "About"
 
 
 def contact_view(request):

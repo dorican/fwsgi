@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-<title>{% block title %}Index{% endblock %}</title>
+{% block title %}Главная{% endblock %}
 
 {% block content %}
     <h1>Обучение программированию</h1>
-    <h3>secret: {{ secret }}</h3>
-    <h1>Список курсов</h1>
+{#    <h3>secret: {{ secret }}</h3>#}
+    <h3>Список курсов</h3>
     <ul>
         {% for item in objects_list %}
             <li>
