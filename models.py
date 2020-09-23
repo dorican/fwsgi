@@ -69,7 +69,6 @@ class CourseFactory:
         return cls.types[type_](name, category)
 
 
-
 class TrainingSite:
     # Интерфейс
     def __init__(self):
