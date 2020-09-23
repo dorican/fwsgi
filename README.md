@@ -15,9 +15,5 @@ You need to install uwsgi:
 
 In folder 'templates' there are template pages.
 
-In file 'views.py' there are examples views.
-
-In file 'routes.py' there are examples urls.
-
 On these examples you may build your own views, urls and template pages.
 
