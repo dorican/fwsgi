@@ -4,11 +4,14 @@
 
 from wavy import render
 from models import TrainingSite
+from logger import Logger
 
 site = TrainingSite()
+logger = Logger('main')
 
 
 def main_view(request):
+    logger.log('Главная страница')
     secret = request.get('secret_key', None)
     # Используем шаблонизатор
     courses = site.courses
@@ -17,6 +20,7 @@ def main_view(request):
 
 
 def create_category(request):
+    logger.log('Создание категории')
     if request['method'] == 'POST':
         data = request['data']
         name = data['name']
@@ -37,6 +41,7 @@ def create_category(request):
 #     return '200 OK', "About"
 
 def create_course(request):
+    logger.log('Создание курса')
     if request['method'] == 'POST':
         data = request['data']
         name = data['name']
@@ -52,6 +57,7 @@ def create_course(request):
 
 
 def contact_view(request):
+    logger.log('Страница контактов')
     # Проверка метода запроса
     if request['method'] == 'POST':
         data = request['data']
