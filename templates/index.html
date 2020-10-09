@@ -34,6 +34,9 @@
             {% for item in students %}
                 <li>
                     {{ item.name }}
+                    {% for course in item.courses %}
+                        {{ course.name }}
+                    {% endfor %}
                 </li>
             {% endfor %}
         {% else %}

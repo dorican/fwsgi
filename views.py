@@ -100,3 +100,4 @@ class AddStudentByCourseCreateView(CreateView):
         student_name = data['student_name']
         student = site.get_student(student_name)
         course.add_student(student)
+        # print(course.students)
