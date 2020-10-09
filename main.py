@@ -3,10 +3,11 @@
 
 from wavy import Application
 import views
-from views import StudentCreateView, AddStudentByCourseCreateView
+from views import StudentCreateView, AddStudentByCourseCreateView, IndexListView
 
 urlpatterns = {
-    '/': views.main_view,
+    # '/': views.main_view,
+    '/': IndexListView(),
     # '/about/': views.about_view,
     '/create-category/': views.create_category,
     '/create-student/': StudentCreateView(),

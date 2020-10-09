@@ -19,6 +19,25 @@ class TemplateView:
         return self.render_template_with_context()
 
 
+class ListView(TemplateView):
+    queryset = []
+    template_name = 'list.html'
+    context_object_name = 'objects_list'
+
+    def get_queryset(self):
+        print(self.queryset)
+        return self.queryset
+
+    def get_context_object_name(self):
+        return self.context_object_name
+
+    def get_context_data(self):
+        queryset = self.get_queryset()
+        context_object_name = self.get_context_object_name()
+        context = {context_object_name: queryset}
+        return context
+
+
 class CreateView(TemplateView):
     template_name = 'create.html'
 

@@ -5,21 +5,33 @@
 from wavy import render
 from models import TrainingSite
 from logger import Logger, debug
-from wavy.cbv import CreateView
+from wavy.cbv import CreateView, ListView
 
 site = TrainingSite()
 logger = Logger('main')
 
 
-@debug
-def main_view(request):
-    logger.log('Главная страница')
-    secret = request.get('secret_key', None)
-    # Используем шаблонизатор
-    courses = site.courses
-    categories = site.categories
-    students = site.students
-    return '200 OK', render('index.html', categories=categories, courses=courses, students=students)
+class IndexListView(ListView):
+    template_name = 'index.html'
+    queryset = site.categories
+    context_object_name = 'categories'
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['courses'] = site.courses
+        context['students'] = site.students
+        return context
+
+
+# @debug
+# def main_view(request):
+#     logger.log('Главная страница')
+#     secret = request.get('secret_key', None)
+#     # Используем шаблонизатор
+#     courses = site.courses
+#     categories = site.categories
+#     students = site.students
+#     return '200 OK', render('index.html', categories=categories, courses=courses, students=students)
 
 
 @debug
