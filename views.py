@@ -5,6 +5,7 @@
 from wavy import render
 from models import TrainingSite
 from logger import Logger, debug
+from wavy.cbv import CreateView
 
 site = TrainingSite()
 logger = Logger('main')
@@ -71,3 +72,12 @@ def contact_view(request):
         return '200 OK', render('contact.html')
     else:
         return '200 OK', render('contact.html')
+
+
+class StudentCreateView(CreateView):
+    template_name = 'create_student.html'
+
+    def create_obj(self, data: dict):
+        name = data['name']
+        new_obj = site.create_user('student', name)
+        site.students.append(new_obj)

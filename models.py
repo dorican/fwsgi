@@ -24,24 +24,6 @@ class UserFactory:
         return cls.types[type_]()
 
 
-class Category:
-    # реестр
-    auto_id = 0
-
-    def __init__(self, name, category):
-        self.id = Category.auto_id
-        Category.auto_id += 1
-        self.name = name
-        self.category = category
-        self.courses = []
-
-    def course_count(self):
-        result = len(self.courses)
-        if self.category:
-            result += self.category.course_count()
-        return result
-
-
 class Course(PrototypeMixin):
 
     def __init__(self, name, category):
@@ -68,6 +50,22 @@ class CourseFactory:
     def create(cls, type_, name, category):
         return cls.types[type_](name, category)
 
+class Category:
+    # реестр
+    auto_id = 0
+
+    def __init__(self, name, category):
+        self.id = Category.auto_id
+        Category.auto_id += 1
+        self.name = name
+        self.category = category
+        self.courses = []
+
+    def course_count(self):
+        result = len(self.courses)
+        if self.category:
+            result += self.category.course_count()
+        return result
 
 class TrainingSite:
     # Интерфейс
