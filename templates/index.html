@@ -28,4 +28,16 @@
             Пока не создано ни одного курса
         {% endif %}
     </ul>
+    <h3>Список студентов</h3>
+    <ul>
+        {% if students %}
+            {% for item in students %}
+                <li>
+                    {{ item.name }}
+                </li>
+            {% endfor %}
+        {% else %}
+            Пока не создано ни одного курса
+        {% endif %}
+    </ul>
 {% endblock %}

@@ -18,7 +18,8 @@ def main_view(request):
     # Используем шаблонизатор
     courses = site.courses
     categories = site.categories
-    return '200 OK', render('index.html', categories=categories, courses=courses)
+    students = site.students
+    return '200 OK', render('index.html', categories=categories, courses=courses, students=students)
 
 
 @debug
