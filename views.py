@@ -82,3 +82,21 @@ class StudentCreateView(CreateView):
         name = data['name']
         new_obj = site.create_user('student', name)
         site.students.append(new_obj)
+
+
+class AddStudentByCourseCreateView(CreateView):
+    template_name = 'add_student.html'
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['courses'] = site.courses
+        context['students'] = site.students
+        return context
+
+    def create_obj(self, data: dict):
+        # breakpoint()
+        course_name = data['course_name']
+        course = site.get_course(course_name)
+        student_name = data['student_name']
+        student = site.get_student(student_name)
+        course.add_student(student)

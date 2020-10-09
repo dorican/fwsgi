@@ -34,6 +34,11 @@ class Course(PrototypeMixin):
         self.name = name
         self.category = category
         self.category.courses.append(self)
+        self.students = []
+
+    def add_student(self, student: Student):
+        self.students.append(student)
+        student.courses.append(self)
 
 
 class InteractiveCourse(Course):
