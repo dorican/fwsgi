@@ -33,6 +33,7 @@ class UnitOfWork:
     def insert_new(self):
         for obj in self.new_objects:
             self.MapperRegistry.get_mapper(obj).insert(obj)
+        self.new_objects.clear()
 
     def update_dirty(self):
         for obj in self.dirty_objects:
