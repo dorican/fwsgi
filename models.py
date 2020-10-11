@@ -80,8 +80,6 @@ class Category(DomainObject):
 
     @classmethod
     def create(cls, name):
-        print(dir(cls))
-        print(name)
         return cls.__class__(name)
 
 
