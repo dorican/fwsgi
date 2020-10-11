@@ -1,7 +1,8 @@
 
 # Запуск
 # uwsgi --http :8000 --wsgi-file main.py
-
+from orm.mappers import MapperRegistry
+from orm.unitofwork import UnitOfWork
 from wavy import render
 from models import TrainingSite
 from logger import Logger, debug
@@ -9,6 +10,8 @@ from wavy.cbv import CreateView, ListView
 
 site = TrainingSite()
 logger = Logger('main')
+UnitOfWork.new_current()
+UnitOfWork.get_current().set_mapper_registry(MapperRegistry)
 
 
 class IndexListView(ListView):
@@ -94,6 +97,14 @@ class StudentCreateView(CreateView):
         name = data['name']
         new_obj = site.create_user('student', name)
         site.students.append(new_obj)
+        new_obj.mark_new()
+        UnitOfWork.get_current().commit()
+
+#         new_obj = site.create_user('student', name)
+#         site.students.append(new_obj)
+#         new_obj.mark_new()
+#         UnitOfWork.get_current().commit()
+
 
 
 class AddStudentByCourseCreateView(CreateView):

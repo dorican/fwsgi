@@ -1,3 +1,4 @@
+from orm.unitofwork import DomainObject
 from reusepatterns.prototypes import PrototypeMixin
 
 
@@ -10,7 +11,7 @@ class Teacher(User):
     pass
 
 
-class Student(User):
+class Student(User, DomainObject):
 
     def __init__(self, name):
         self.courses = []
