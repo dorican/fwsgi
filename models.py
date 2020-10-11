@@ -60,15 +60,16 @@ class CourseFactory:
     def create(cls, type_, name, category):
         return cls.types[type_](name, category)
 
-class Category:
-    # реестр
-    auto_id = 0
 
-    def __init__(self, name, category):
-        self.id = Category.auto_id
-        Category.auto_id += 1
+class Category(DomainObject):
+    # реестр
+    # auto_id = 0
+
+    def __init__(self, name):
+        # self.id = Category.auto_id
+        # Category.auto_id += 1
         self.name = name
-        self.category = category
+        # self.category = category
         self.courses = []
 
     def course_count(self):
@@ -76,6 +77,13 @@ class Category:
         if self.category:
             result += self.category.course_count()
         return result
+
+    @classmethod
+    def create(cls, name):
+        print(dir(cls))
+        print(name)
+        return cls.__class__(name)
+
 
 class TrainingSite:
     # Интерфейс
@@ -88,8 +96,10 @@ class TrainingSite:
     def create_user(self, type_, name):
         return UserFactory.create(type_, name)
 
-    def create_category(self, name, category=None):
-        return Category(name, category)
+    def create_category(self, type_, name):
+        # print(self, name)
+        # return Category(name)
+        return Category(name)
 
     def find_category_by_id(self, id):
         for item in self.categories:
@@ -97,13 +107,6 @@ class TrainingSite:
             if item.id == id:
                 return item
         raise Exception(f'Нет категории с id = {id}')
-
-    #
-    # def get_or_create_category(self, name):
-    #     for item in self.categories:
-    #         if item.name == name:
-    #             return item
-    #     return self.create_category(name)
 
     def create_course(self, type_, name, category):
         return CourseFactory.create(type_, name, category)

@@ -1,5 +1,5 @@
 import sqlite3
-from models import Student
+from models import Student, Category
 
 connection = sqlite3.connect('database/db.sqlite')
 
@@ -42,14 +42,32 @@ class StudentMapper:
             result.append(student)
         return result
 
-    def find_by_id(self, id):
-        statement = f"SELECT id, name FROM {self.tablename} WHERE id=?"
-        self.cursor.execute(statement, (id,))
-        result = self.cursor.fetchone()
-        if result:
-            return Student(*result)
-        else:
-            raise RecordNotFoundException(f'record with id={id} not found')
+    def insert(self, obj):
+        statement = f"INSERT INTO {self.tablename} (name) VALUES (?)"
+        self.cursor.execute(statement, (obj.name,))
+        try:
+            self.connection.commit()
+        except Exception as e:
+            raise DbCommitException(e.args)
+
+
+class CategoryMapper:
+
+    def __init__(self, connection):
+        self.connection = connection
+        self.cursor = connection.cursor()
+        self.tablename = 'category'
+
+    def all(self):
+        statement = f'SELECT * from {self.tablename}'
+        self.cursor.execute(statement)
+        result = []
+        for item in self.cursor.fetchall():
+            id, name = item
+            category = Category(name)
+            category.id = id
+            result.append(category)
+        return result
 
     def insert(self, obj):
         statement = f"INSERT INTO {self.tablename} (name) VALUES (?)"
@@ -60,16 +78,18 @@ class StudentMapper:
             raise DbCommitException(e.args)
 
 
-
 class MapperRegistry:
     mappers = {
-        'student': StudentMapper
+        'student': StudentMapper,
+        'category': CategoryMapper
     }
 
     @staticmethod
     def get_mapper(obj):
         if isinstance(obj, Student):
             return StudentMapper(connection)
+        elif isinstance(obj, Category):
+            return CategoryMapper(connection)
 
     @staticmethod
     def get_current_mapper(name):
