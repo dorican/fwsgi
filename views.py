@@ -22,7 +22,8 @@ class IndexListView(ListView):
     def get_context_data(self):
         context = super().get_context_data()
         context['courses'] = site.courses
-        context['students'] = site.students
+        mapper_student = MapperRegistry.get_current_mapper('student')
+        context['students'] = mapper_student.all()
         return context
 
 
