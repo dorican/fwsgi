@@ -31,12 +31,7 @@ class UnitOfWork:
         self.delete_removed()
 
     def insert_new(self):
-        print(dir(self))
-        print('new_objects', self.new_objects)
         for obj in self.new_objects:
-            print('obj', dir(obj))
-            print('obj', obj)
-            print('MapperRegistry', self.MapperRegistry.get_mapper(obj))
             self.MapperRegistry.get_mapper(obj).insert(obj)
 
     def update_dirty(self):

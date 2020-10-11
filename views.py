@@ -16,9 +16,6 @@ UnitOfWork.get_current().set_mapper_registry(MapperRegistry)
 
 class IndexListView(ListView):
     template_name = 'index.html'
-    # queryset = site.categories
-    # queryset = MapperRegistry.get_current_mapper('category')
-    # context_object_name = 'categories'
 
     def get_context_data(self):
         context = super().get_context_data()
