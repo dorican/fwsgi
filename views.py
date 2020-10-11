@@ -45,40 +45,9 @@ class CategoryCreateView(CreateView):
     def create_obj(self, data: dict):
         name = data['name']
         new_obj = site.create_category('category', name)
-        # print(dir(new_obj))
-        # print(new_obj.__dict__)
         site.categories.append(new_obj)
         new_obj.mark_new()
         UnitOfWork.get_current().commit()
-
-    # def create_obj(self, data: dict):
-    #     name = data['name']
-    #     new_obj = site.create_user('student', name)
-    #     site.students.append(new_obj)
-    #     new_obj.mark_new()
-    #     UnitOfWork.get_current().commit()
-
-# @debug
-# def create_category(request):
-#     logger.log('Создание категории')
-#     if request['method'] == 'POST':
-#         data = request['data']
-#         # name = data['name']
-#         # category_id = data.get('category_id')
-#         # category = None
-#         name = data['name']
-#         new_obj = site.create_category('category', name)
-#         site.categories.append(new_obj)
-#         new_obj.mark_new()
-#         UnitOfWork.get_current().commit()
-#         # if category_id:
-#         #     category = site.find_category_by_id(int(category_id))
-#         # new_category = site.create_category(name, category)
-#         # site.categories.append(new_category)
-#         return '200 OK', render('create_category.html')
-#     else:
-#         categories = site.categories
-#         return '200 OK', render('create_category.html', categories=categories)
 
 
 @debug
