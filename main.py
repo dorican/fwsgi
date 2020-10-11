@@ -6,9 +6,7 @@ import views
 from views import StudentCreateView, AddStudentByCourseCreateView, IndexListView
 
 urlpatterns = {
-    # '/': views.main_view,
     '/': IndexListView(),
-    # '/about/': views.about_view,
     '/create-category/': views.create_category,
     '/create-student/': StudentCreateView(),
     '/add-student/': AddStudentByCourseCreateView(),

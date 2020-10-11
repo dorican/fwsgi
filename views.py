@@ -27,17 +27,6 @@ class IndexListView(ListView):
         return context
 
 
-# @debug
-# def main_view(request):
-#     logger.log('Главная страница')
-#     secret = request.get('secret_key', None)
-#     # Используем шаблонизатор
-#     courses = site.courses
-#     categories = site.categories
-#     students = site.students
-#     return '200 OK', render('index.html', categories=categories, courses=courses, students=students)
-
-
 @debug
 def create_category(request):
     logger.log('Создание категории')
@@ -56,9 +45,6 @@ def create_category(request):
         return '200 OK', render('create_category.html', categories=categories)
 
 
-# def about_view(request):
-#     # Просто возвращаем текст
-#     return '200 OK', "About"
 @debug
 def create_course(request):
     logger.log('Создание курса')
