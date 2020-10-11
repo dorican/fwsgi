@@ -59,22 +59,6 @@ class StudentMapper:
         except Exception as e:
             raise DbCommitException(e.args)
 
-    def update(self, obj):
-        statement = f"UPDATE {self.tablename} SET name=? WHERE id=?"
-        # Где взять obj.id? Добавить в DomainModel? Или добавить когда берем объект из базы
-        self.cursor.execute(statement, (obj.name, obj.id))
-        try:
-            self.connection.commit()
-        except Exception as e:
-            raise DbUpdateException(e.args)
-
-    def delete(self, obj):
-        statement = f"DELETE FROM {self.tablename} WHERE id=?"
-        self.cursor.execute(statement, (obj.id,))
-        try:
-            self.connection.commit()
-        except Exception as e:
-            raise DbDeleteException(e.args)
 
 
 class MapperRegistry:
