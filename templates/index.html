@@ -1,16 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Главная страница</title>
-</head>
-<body>
-<h1>Главная страница</h1>
-<!--    {{object_list[0]['context']}}-->
-<ul>
-    {% for item in object_list %}
-    <li>{{item.context}}</li>
-    {% endfor %}
-</ul>
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+    <h1>Обучение программированию</h1>
+    {#    <h3>secret: {{ secret }}</h3>#}
+    <h3>Список категорий</h3>
+    <ul>
+        {% if categories %}
+            {% for item in categories %}
+                <li>
+                    {{ item.name }}
+                </li>
+            {% endfor %}
+        {% else %}
+            Пока не создано ни одной категории
+        {% endif %}
+    </ul>
+    <h3>Список курсов</h3>
+    <ul>
+        {% if courses %}
+            {% for item in courses %}
+                <li>
+                    {{ item.name }} <span><a href="#">скопировать</a></span>
+                </li>
+            {% endfor %}
+        {% else %}
+            Пока не создано ни одного курса
+        {% endif %}
+    </ul>
+    <h3>Список всех студентов</h3>
+    <ul>
+        {% if students %}
+            {% for item in students %}
+                <li>
+                    {{ item.name }}
+                    {% for course in item.courses %}
+                        {{ course.name }}
+                    {% endfor %}
+                </li>
+            {% endfor %}
+        {% else %}
+            Пока не создано ни одного курса
+        {% endif %}
+    </ul>
+{% endblock %}
